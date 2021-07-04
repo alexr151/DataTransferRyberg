@@ -1,6 +1,7 @@
 ﻿@model CountryListViewModel
+@using Microsoft.AspNetCore.Http; 
 @{
-    ViewData["Title"] = "Countries in the Olympics";
+    ViewData["Title"] = "Countries in the Olympics";   
 }
 
 <div class="row">
@@ -39,15 +40,9 @@
                 @foreach (Country country in Model.Countries)
                 {
                 <li class="list-inline-item">
-                    <form asp-action="Details" method="post">
-                        <button class="bg-white border-0" type="submit">
-                            <img src="~/Flags/@country.LogoImage" alt="@country.Name" title="@country.Name | @country.Game.Name @country.Sport.Name" style="width: 200px; height: 150px;padding: 0.5em; border:solid 0.5px green;" />
-                        </button>
-
-                        <input type="hidden" asp-for="@country.CountryId" />
-                        <input type="hidden" asp-for="ActiveGame" />
-                        <input type="hidden" asp-for="ActiveSport" />
-                    </form>
+                    <a asp-action="Details" asp-route-id="@country.CountryId">
+                        <img src="~/Flags/@country.LogoImage" alt="@country.Name" title="@country.Name | @country.Game.Name @country.Sport.Name" style="width: 200px; height: 150px;padding: 0.5em; border:solid 0.5px green;" />
+                    </a>
                 </li>
             }
         </ul>
